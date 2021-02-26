@@ -13,9 +13,10 @@ export class PowerService {
   constructor() { }
 
   power(base: number, exponent: number): number{
-    if(base === 2 && exponent ===2) {
-      return 4;
-    }
-    return NaN;
+    // if(base === 2 && exponent ===2) {
+    //   return 4;
+    // }
+    // return NaN;
+    return Math.pow(base, exponent);
   }
 }
