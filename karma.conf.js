@@ -8,6 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-sabarivka-reporter'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
@@ -27,12 +28,21 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/ng11'),
       subdir: '.',
+      include: [
+        // Specify include pattern(s) first
+        'src/**/*.(ts|js)',
+        // Then specify "do not include" patterns (note `!` sign on the beginning of each statement)
+        '!src/main.(ts|js)',
+        '!src/**/*.spec.(ts|js)',
+        '!src/**/*.module.(ts|js)',
+        '!src/**/environment*.(ts|js)'
+      ],
       reporters: [
         { type: 'html' },
         { type: 'text-summary' }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'sabarivka', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
